@@ -2,12 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
+const path = require("path");
 
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(cors());
+
+// Serve uploaded images statically
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // MongoDB Connection
 mongoose.connect("mongodb://127.0.0.1:27017/local", {
